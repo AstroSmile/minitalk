@@ -91,6 +91,7 @@ clean:
 
 fclean:
 	@$(RM) $(CLIENT) $(SERVER) $(CLIENT_BON) $(SERVER_BON)
+	@$(RM) $(OBJ_SRV) $(OBJ_CLT) $(B_OBJ_SR) $(B_OBJ_CL)
 	@echo "$(GREEN)\r  ✓  $(GREEN)Limpieza completa de $(CLIENT) and $(SERVER) $(END)"
 
 re: fclean all

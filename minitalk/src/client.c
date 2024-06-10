@@ -41,12 +41,20 @@ void	send_signal(pid_t pid, char *c)
 // Function to send a string to the server
 void	send_string(pid_t pid, char *str)
 {
-    
-    int	i;
+    int i;
+    int j;
+    char  *byte;
 
     i = 0;
+    byte = (char *)malloc(sizeof(char) * 8 + 1);
     while (str[i])
     {
+        j = 0;
+        while (j < 7)
+        {
+            byte[j] = (str[i] >> j) & 1;
+            j++;
+        }
         send_signal(pid, str[i]);
         i++;
     }
@@ -60,7 +68,7 @@ int	main(int argc, char **argv)
 
     if (argc != 3)
     {
-        ft_putstr_fd("Error: Wrong number of arguments\n", 2);
+        ft_printf("Error: Wrong number of arguments\n");
         return (1);
     }
     pid = ft_atoi(argv[1]);
