@@ -14,25 +14,34 @@
 
 
 // Function to send a signal to the server
-void	send_signal(int pid, char c)
+void	send_signal(pid_t pid, char *c)
 {
     int	i;
 
     i = 0;
-    while (i < 7)
+    while (c[i])
     {
-        if (c & 1)
-            kill(pid, SIGUSR1);
+        if (c[i] == 1)
+            if (kill(pid, SIGUSR1) < 0)
+            {
+                ft_printf("Unexpected Error");
+                exit[EXIT_FAILURE];
+            }
         else
-            kill(pid, SIGUSR2);
-        c = c >> 1;
+            if (kill(pid, SIGUSR2) < 0)
+            {
+                ft_printf("Unexpected Error");
+                exit[EXIT_FAILURE];
+            }
         usleep(200);
         i++;
     }
 }
+
 // Function to send a string to the server
-void	send_string(int pid, char *str)
+void	send_string(pid_t pid, char *str)
 {
+    
     int	i;
 
     i = 0;
