@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../libft.h"
 
 char	*ft_free_gnl(char **s)
 {
@@ -81,7 +81,7 @@ char	*ft_read_text(int fd, char *stc)
 		if (byte_read == -1)
 		{
 			ft_free_gnl(&buff);
-			return (ft_free(&stc));
+			return (ft_free_gnl(&stc));
 		}
 		buff[byte_read] = '\0';
 		stc = ft_strjoin_gnl(stc, buff);
@@ -98,7 +98,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (ft_free(stc));
+		return (ft_free_gnl(stc));
 	stc[fd] = ft_read_text(fd, stc[fd]);
 	if (!stc[fd])
 		return (NULL);

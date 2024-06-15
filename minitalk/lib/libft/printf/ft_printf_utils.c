@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "../libft/libft.h"
+#include "../libft.h"
 
 void	ft_putchar(char c, int *len)
 {
@@ -47,11 +46,9 @@ void	ft_pointer(unsigned long long nbr, int *len)
 
 void	ft_putnbr_base(int long long nbr, char *base, int *len)
 {
-	int	i;
 	int	size_base;
 
 	size_base = ft_strlen(base);
-	i = 0;
 	if (*len == -1)
 		return ;
 	if (nbr < 0)

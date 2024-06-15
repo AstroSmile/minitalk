@@ -59,20 +59,21 @@ SRCB = ft_lstnew_bonus.c \
 		ft_lstclear_bonus.c \
 		ft_lstiter_bonus.c \
 		ft_lstmap_bonus.c \
-PF_SRC = ../printf/ft_printf_utils.c \
-				../printf/ft_printf.c
 
-GNL_SRC = ../gnl/get_next_line.c \
-				../gnl/get_next_line_utils.c
+PF_SRC = printf/ft_printf_utils.c \
+				printf/ft_printf.c 
+
+GNL_SRC = gnl/get_next_line.c \
+				gnl/get_next_line_utils.c
 				
 OBJ = $(SRC:.c=.o)
 BOBJ = $(SRCB:.c=.o)
 PF_OBJECT = $(PF_SRC:.c=.o)
-GNL_OBJECT = $(GNL_SRC:.C=.O)
+GNL_OBJECT = $(GNL_SRC:.c=.o)
 
 all: $(NAME) 
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(PF_OBJECT) $(GNL_OBJECT)
 	@ar rcs $(NAME) $(OBJ) $(PF_OBJECT) $(GNL_OBJECT)
 	@echo "\033[0;32mCreando libreria libft.a\033[0m"
 
@@ -82,6 +83,7 @@ bonus: $(BOBJ)
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
 	@$(CLEAN) ./*.o
 

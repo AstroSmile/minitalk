@@ -12,10 +12,16 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include "../printf/ft_printf.h"
-# include "../gnl/get_next_line.h"
+
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
+# include <fcntl.h>
+# include <stdio.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 200
+# endif
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -66,5 +72,22 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));	
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/*FUNCIONES DE PRINTF*/
+int		ft_printf(char const *str, ...);
+void	ft_putchar(char c, int *len);
+void	ft_putstr(char *s, int *len);
+void	ft_putnbr_base(int long long nbr, char *base, int *len);
+void	ft_pointer(unsigned long long nbr, int *len);
+/*FUNCIONES DE GNL*/
+char	*ft_read_text(int fd, char *stc);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize);
+int		ft_strlen_gnl(char *s);
+char	*ft_strchr_gnl(char *s, int c);
+char	*ft_find_line(char *stc);
+char	*get_next_line(int fd);
+char	*ft_free_gnl(char **s);
+char	*ft_calloc_gnl(int c);
 
 #endif

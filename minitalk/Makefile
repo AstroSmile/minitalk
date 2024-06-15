@@ -74,11 +74,11 @@ $(CLIENT) : $(OBJ_CLT)
 $(SERVER) : $(OBJ_SRV)
 	@$(CC_FLAGS) $(OBJ_SRV) $(INCLUDE) -o $(SERVER)
 
-$(CLIENT_BON) : $(B_OBJ_CL)
-	@$(CC_FLAGS) $(B_OBJ_CL) $(INCLUDE) -o $(CLIENT_BON)
+#$(CLIENT_BON) : $(B_OBJ_CL)
+#	@$(CC_FLAGS) $(B_OBJ_CL) $(INCLUDE) -o $(CLIENT_BON)
 
-$(SERVER_BON) : $(B_OBJ_SR)
-	@$(CC_FLAGS) $(B_OBJ_SR) $(INCLUDE) -o $(SERVER_BON)
+#$(SERVER_BON) : $(B_OBJ_SR)
+#	@$(CC_FLAGS) $(B_OBJ_SR) $(INCLUDE) -o $(SERVER_BON)
 
 %.o : %.c $(MINITALK)
 	@$(CC_FLAGS) -c $< -o $@ $(DEPS)
@@ -91,9 +91,9 @@ clean:
 
 fclean:
 	@$(RM) $(CLIENT) $(SERVER) $(CLIENT_BON) $(SERVER_BON)
-	@$(RM) $(OBJ_SRV) $(OBJ_CLT) $(B_OBJ_SR) $(B_OBJ_CL)
+#@$(RM) $(OBJ_SRV) $(OBJ_CLT) $(B_OBJ_SR) $(B_OBJ_CL)
 	@echo "$(GREEN)\r  ✓  $(GREEN)Limpieza completa de $(CLIENT) and $(SERVER) $(END)"
 
-re: fclean all
+re: fclean clear all
 
 .PHONY: all clean fclean re bonus

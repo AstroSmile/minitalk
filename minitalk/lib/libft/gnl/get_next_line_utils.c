@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../libft.h"
 
 char	*ft_calloc_gnl(int size)
 {
@@ -51,16 +51,16 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	if (!s1)
 		s1 = ft_calloc_gnl(1);
 	if (!s1 || !s2)
-		return (ft_free(&s1));
+		return (ft_free_gnl+(&s1));
 	len1 = ft_strlen_gnl(s1);
 	len2 = ft_strlen_gnl(s2);
 	lent = len1 + len2 + 1;
 	new = (char *)malloc(lent);
 	if (!new)
-		return (ft_free(&s1));
+		return (ft_free_gnl(&s1));
 	ft_strlcpy_gnl(new, (char *)s1, len1 + 1);
 	ft_strlcpy_gnl(&new[len1], s2, lent);
-	ft_free(&s1);
+	ft_free_gnl(&s1);
 	return ((char *)new);
 }
 
