@@ -51,7 +51,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	if (!s1)
 		s1 = ft_calloc_gnl(1);
 	if (!s1 || !s2)
-		return (ft_free_gnl+(&s1));
+		return (ft_free_gnl(&s1));
 	len1 = ft_strlen_gnl(s1);
 	len2 = ft_strlen_gnl(s2);
 	lent = len1 + len2 + 1;
@@ -86,7 +86,7 @@ size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize)
 
 char	*ft_strchr_gnl(char *s, int c)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (s && s[i] != '\0')

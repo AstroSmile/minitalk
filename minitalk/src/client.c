@@ -24,18 +24,21 @@ void	send_signal(pid_t pid, char *c)
 		{
 			if (kill(pid, SIGUSR1) < 0)
 			{
-				ft_printf("Unexpected Error\n");
-				exit(EXIT_FAILURE);
-			}
-			else if(kill(pid, SIGUSR2) < 0)
-			{
-				ft_printf("Unexpected Error\n");
+				ft_printf("Unexpected Error 1\n");
 				exit(EXIT_FAILURE);
 			}
 		}
+		else if (c[i] == '0')
+		{
+			if(kill(pid, SIGUSR2) < 0)
+			{
+				ft_printf("Unexpected Error 0\n");
+				exit(EXIT_FAILURE);
+			}
+		}
+		usleep(200);
+		i++;
 	}
-	usleep(200);
-	i++;
 }
 
 void	send_string(pid_t pid, char *str)
@@ -46,9 +49,9 @@ void	send_string(pid_t pid, char *str)
 	char	*byte;
 
 	i = 0;
-	byte = (char *)malloc(sizeof(int) * 8 + 1);
 	while (str[i])
 	{
+		byte = (char *)malloc(sizeof(int) * 7 + 1);
 		h = 0;
 		j = 6;
 		while (h < 7)
@@ -58,24 +61,27 @@ void	send_string(pid_t pid, char *str)
 			h++;
 			j--;
 		}
-		byte[7] = '\0';
+		byte[8] = '\0';
+		send_signal(pid, byte);
+		free(byte);
+		usleep(200);
+		i++;
 	}
-	send_string(pid, byte);
-	free(byte);
-	usleep(200);
 }
 
 // Main function
 int	main(int argc, char **argv)
 {
-	int	pid;
+	int		pid;
+	char	*message;
 
 	if (argc != 3)
 	{
-		//ft_printf("Error: Wrong number of arguments\n");
-		//return (1);
+		ft_printf("Error: Wrong number of arguments\n");
+		return (1);
 	}
 	pid = ft_atoi(argv[1]);
-	send_string(pid, argv[2]);
+	message = argv[2];
+	send_string(pid, message);
 	return (0);
 }

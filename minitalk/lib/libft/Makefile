@@ -85,7 +85,7 @@ bonus: $(BOBJ)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@$(CLEAN) ./*.o
+	@$(CLEAN) $(OBJ) $(BOBJ) $(PF_OBJECT) $(GNL_OBJECT)
 
 fclean:
 	@$(CLEAN) ./*.o

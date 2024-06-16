@@ -12,44 +12,50 @@
 
 #include <minitalk.h>
 
-void signal_handler(int sig)
+void	signal_handler(int sig)
 {
-	static int	character;
 	static int	num_bits;
+	static int	character;
 
-	character = 0;
-	num_bits = 0;
-  if (sig == SIGUSR1)
+	if (sig == SIGUSR1)
+	{
 		character = (character << 1) | 1;
-  else if (sig == SIGUSR2)
-    character = (character << 1) | 0;
-  num_bits++;
-  if (num_bits == 7)
-  {
-		printf("%c", character);
-    fflush(stdout);
-    num_bits = 0;
-    character = 0;
-  }
+		//printf("Received SIGUSR1\n");
+	}
+	else if (sig == SIGUSR2)
+	{
+		character = (character << 1) | 0;
+		//printf("Received SIGUSR2\n");
+	}
+	num_bits++;
+	//ft_printf("Character: %d\n", num_bits);
+	if (num_bits == 7)
+	{
+		ft_printf("%c" ,character);
+		fflush(stdout);
+		num_bits = 0;
+		character = 0;
+	}
 }
 
-void setup_signal_handlers(void)
+void	setup_signal_handlers(void)
 {
 	if (signal(SIGUSR1, signal_handler) == SIG_ERR)
-  perror("Error: SIGUSR1");
+		perror("Error: SIGUSR1");
 	if (signal(SIGUSR2, signal_handler) == SIG_ERR)
-  perror("Error: SIGUSR2");
+		perror("Error: SIGUSR2");
 }
 
-int main(void)
+int	main(void)
 {
-    printf("\033[0;32mSUCCESS!, Server is ready :D! The PID:%d\033[0m\n", getpid());
-    setup_signal_handlers();
-    printf("\033[0;32mRecibiendo señal del cliente\033[0m\n");
-    while (1)
-    {
-      pause();
-      printf("\033[0;32mServidor en espera\033[0m\n");
-    }
-    return 0;
+	printf("\033[0;32mSUCCESS!, Server is ready :D! The PID:%d\033[0m\n",
+		getpid());
+	setup_signal_handlers();
+	printf("\033[0;32mRecibiendo señal del cliente\033[0m\n");
+	while (1)
+	{
+		pause();
+		//printf("\033[0;32mServidor en espera\033[0m\n");
+	}
+	return (0);
 }
