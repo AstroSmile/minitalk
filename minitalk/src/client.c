@@ -61,10 +61,10 @@ void	send_string(pid_t pid, char *str)
 			h++;
 			j--;
 		}
-		byte[8] = '\0';
+		byte[7] = '\0';
 		send_signal(pid, byte);
 		free(byte);
-		usleep(200);
+		usleep(500);
 		i++;
 	}
 }
@@ -83,5 +83,7 @@ int	main(int argc, char **argv)
 	pid = ft_atoi(argv[1]);
 	message = argv[2];
 	send_string(pid, message);
+	send_string(pid, "\0");
+
 	return (0);
 }
