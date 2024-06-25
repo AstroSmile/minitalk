@@ -36,7 +36,7 @@ void	send_signal(pid_t pid, char *c)
 				exit(EXIT_FAILURE);
 			}
 		}
-		usleep(500);
+		usleep(200);
 		i++;
 	}
 }
@@ -64,7 +64,7 @@ void	send_string(pid_t pid, char *str)
 		byte[7] = '\0';
 		send_signal(pid, byte);
 		free(byte);
-		usleep(500);
+		usleep(200);
 		i++;
 	}
 }
