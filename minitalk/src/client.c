@@ -36,7 +36,7 @@ void	send_signal(pid_t pid, char *c)
 				exit(EXIT_FAILURE);
 			}
 		}
-		usleep(200);
+		usleep(500);
 		i++;
 	}
 }
